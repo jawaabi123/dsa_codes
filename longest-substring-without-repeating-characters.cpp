@@ -73,3 +73,32 @@ int lengthOfLongestSubstring(string s)
         
 };
 
+optimal1:
+
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string input)
+{
+        
+        if(input.size()==0)
+          return 0;
+        int maxans = INT_MIN;
+        int n=input.size();
+        int l=0;
+        set<int>set1;
+        for(int r=0;r<n;r++)
+        {
+             if(set1.find(input[r])!=set1.end())
+             {
+                 while(l<r && set1.find(input[r])!=set1.end())
+                 {
+                     set1.erase(input[l]);
+                     l++;
+                 }
+             }
+             set1.insert(input[r]);
+             maxans=max(maxans,r-l+1);
+        }
+        return maxans;
+        
+       
+}
