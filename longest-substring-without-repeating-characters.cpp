@@ -102,3 +102,30 @@ int uniqueSubstrings(string input)
         
        
 }
+
+best(o(n)):
+
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string input)
+{
+        
+        if(input.size()==0)
+          return 0;
+        int maxans = INT_MIN;
+        int n=input.size();
+        vector<int>mpp(256,-1);
+        int l=0; //left pointer(start of substring)
+        int r=0;
+        for(int r=0;r<n;r++)
+        {
+             if(mpp[input[r]]!=-1)
+             {
+                 l=max(l,mpp[input[r]]+1);
+             }
+             mpp[input[r]]=r;
+             maxans=max(maxans,r-l+1);
+        }
+        return maxans;
+        
+       
+}
