@@ -44,32 +44,32 @@ optimized brute2:
 
 class Solution {
 public:
-    int lengthOfLongestSubstring(string s) 
-    {
-        int n=s.size();
-        int max1=INT_MIN;
-        int flag=0;
-        if(n==0) 
-           return 0;
-        else
+int lengthOfLongestSubstring(string s) 
+{
+        int maxans = INT_MIN;
+        if(s.size()==0)
+            return 0;
+        
+        
+        for (int i = 0; i < s.length(); i++) 
         {
-           for(int i=0;i<n;i++)
+            unordered_set < int > set;
+            for (int j = i; j < s.length(); j++) 
             {
-                set<int>se;
-                for(int j=i;j<n;j++)
+                if (set.find(s[j]) != set.end())
                 {
-                if(se.find(s[j])!=se.end())
-                {
-                    max1=max(max1,j-i);
                     break;
                 }
-                se.insert(s[j]);
-                }
+                set.insert(s[j]);
+                int k=set.size();
+                if(k>maxans) maxans=k;
             }
-        return max1;
         }
+        return maxans;
         
+
+}
+            
         
-    }
 };
 
