@@ -39,7 +39,37 @@ public:
         }
         return max1;
     }
-};
 
-brute2:
+optimized brute2:
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) 
+    {
+        int n=s.size();
+        int max1=INT_MIN;
+        int flag=0;
+        if(n==0) 
+           return 0;
+        else
+        {
+           for(int i=0;i<n;i++)
+            {
+                set<int>se;
+                for(int j=i;j<n;j++)
+                {
+                if(se.find(s[j])!=se.end())
+                {
+                    max1=max(max1,j-i);
+                    break;
+                }
+                se.insert(s[j]);
+                }
+            }
+        return max1;
+        }
+        
+        
+    }
+};
 
