@@ -1,0 +1,67 @@
+https://takeuforward.org/plus/data-structures-and-algorithm/arrays/logic-building/find-missing-number
+
+1)approach with tc-o(n^2),sc=o(1):
+
+bool search(int val,vector<int>nums)
+{
+    for(int i=0;i<nums.size();i++)
+    {
+        if(nums[i]==val) return true;
+    }
+    return false;
+}
+
+class Solution {
+public:
+
+    int missingNumber(vector<int>& nums) 
+    {
+        int ans=0;
+        for(int i=0;i<nums.size()+1;i++)
+        {
+           if(search(i,nums)==false)
+           {
+              ans=i;
+           }
+
+        }
+        return ans;
+    }
+};
+
+2)approach with tc-o(n),sc-o(n):
+class Solution {
+public:
+
+    int missingNumber(vector<int>& nums) 
+    {
+        int ans=0;
+        unordered_set<int>missing;
+        for(int i=0;i<nums.size();i++)
+        {
+            missing.insert(nums[i]);
+        }
+        for(int i=0;i<nums.size()+1;i++)
+        {
+            if(missing.find(i)==missing.end())
+            {
+                ans=i;
+            }
+        }
+        return ans;
+    }
+};
+3)approach with tc-o(n),sc-o(1):
+class Solution {
+public:
+
+    int missingNumber(vector<int>& nums) 
+    {
+        int sum=0;
+        for(int i=0;i<nums.size();i++)
+        {
+            sum+=nums[i];
+        }
+        return (nums.size()*(nums.size()+1))/2-sum;
+    }
+};
