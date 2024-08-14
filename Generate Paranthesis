@@ -1,0 +1,28 @@
+https://takeuforward.org/plus/data-structures-and-algorithm/recursion/implementation-problems/generate-paranthesis
+class Solution {
+void parantheses(int open,int close,int n,string s,vector<string>&ans)
+{
+    if(open+close==2*n && open==close) //base case for returning this function call
+    {
+        ans.push_back(s);
+        return;
+    }
+    if(open<n)
+    {
+        parantheses(open+1,close,n,s+'(',ans);
+    }
+    if(close<open)
+    {
+        parantheses(open,close+1,n,s+')',ans);
+    }
+    
+}
+public:
+    
+    vector<string> generateParenthesis(int n) 
+    {
+        vector<string>ans;
+        parantheses(0,0,n,"",ans);
+        return ans;
+    }
+};
