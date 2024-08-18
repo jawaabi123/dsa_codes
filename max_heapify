@@ -1,0 +1,29 @@
+https://www.naukri.com/code360/problems/build-heap_975375?leftPanelTabValue=SUBMISSION
+#include <bits/stdc++.h> 
+void heapify(int n,vector<int>&arr,int idx)
+{
+     int current=idx;
+	 int left=2*idx+1;
+	 int right=2*idx+2;
+     if(left<n && arr[left]>arr[current])
+	 {
+        current=left;
+	 }
+	 if(right<n && arr[right]>arr[current])
+	 {
+		 current=right;
+	 }
+	 if(current!=idx)
+	 {
+		 swap(arr[idx],arr[current]);
+		 heapify(n,arr,current);
+	 }
+}
+vector<int> buildHeap(vector<int> arr, int n)
+{	
+	for(int i=n/2;i>=0;i--)
+	{
+		heapify(n,arr,i);
+	}
+	return arr;
+}
