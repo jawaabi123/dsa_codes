@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+#include<iostream>
+using namespace std;
+
+bool find(int x,int y,int k,vector<pair<int,int>>&obs)
+{
+    for(int i=0;i<k;i++)
+    {
+        if(x==obs[i].first && y==obs[i].second)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+int check(int n,int x,int y,int dx,int dy,int k,vector<pair<int,int>>&obs)
+{
+   int ans=0;
+   while(x>=1 && x<=n && y>=1 && y<=n)
+   {
+        x+=dx;
+        y+=dy;
+        if(find(x,y,k,obs))
+        {
+            return ans;
+        }
+        ans++;
+   }
+   return ans-1;
+}
+int main()
+{
+   vector<int>number;
+   vector<pair<int,int>>obs;
+   int n=0;
+   int k=0;
+   cout<<"Enter chessboard size:";
+   cin>>n;
+   int x,y;
+   cout<<"Enter x,y:";
+   cin>>x>>y;
+   cout<<"Enter number of obstacles:";
+   cin>>k;
+   for(int i=0;i<k;i++)
+   {
+     int x,y;
+     cout<<"enter obstacle:";
+     cin>>x>>y;
+     obs.push_back(make_pair(x,y)); //important syntax
+   }
+   int ans=0;
+   ans+=check(n,x,y,1,0,k,obs); //right
+   ans+=check(n,x,y,-1,0,k,obs);
+   ans+=check(n,x,y,0,1,k,obs);
+   ans+=check(n,x,y,0,-1,k,obs);
+   ans+=check(n,x,y,1,1,k,obs);
+   ans+=check(n,x,y,-1,1,k,obs);
+   ans+=check(n,x,y,1,-1,k,obs);
+   ans+=check(n,x,y,-1,-1,k,obs);
+   cout<<ans;
+   return 0;
+   
+}
