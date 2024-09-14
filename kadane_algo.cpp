@@ -6,7 +6,7 @@ brute:
 
 long long maxSubarraySum(vector<int> arr, int n)
 {
-    int maxsum=0;
+    int maxsum=INT_MIN;
     for(int i=0;i<n;i++)
     {
         for(int j=i;j<n;j++)
