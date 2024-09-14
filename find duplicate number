@@ -1,0 +1,45 @@
+https://leetcode.com/problems/find-the-duplicate-number/description/
+1)brute-o(n2)-using two for loops
+2)better:tc-o(nlogn),sc-o(1)
+include <bits/stdc++.h>
+#include<iostream>
+using namespace std;
+
+class Solution {
+   public:
+      int repeating_num(vector<int> nums)
+      {
+         sort(nums.begin(),nums.end());
+         int count=1;
+         for(int i=1;i<nums.size();i++)
+         {
+            if(nums[i]==nums[i-1]) count++;
+            if(count>1)  return nums[i];
+            count=1;
+         }
+         return 0;
+      }
+};
+2)optimal:tc-o(n)
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) 
+    {
+        int slow=0;
+        int fast=0;
+        int slow1=0;
+        while(1)
+        {
+            slow=nums[slow];
+            fast=nums[nums[fast]];
+            if(fast==slow) break;
+        }
+        while(1)
+        {
+            slow=nums[slow];
+            slow1=nums[slow1];
+            if(slow1==slow) break;
+        }
+        return slow;
+    }
+};
