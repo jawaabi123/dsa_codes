@@ -1,0 +1,33 @@
+https://www.geeksforgeeks.org/problems/all-divisors-of-a-number/1
+optimal approach:
+class Solution {
+  public:
+    void print_divisors(int n) 
+    {
+        vector<int>ans;
+        for(int i=1;i<=sqrt(n);i++)
+        {
+            if(n%i==0)
+            {
+                if(i==(n/i)) 
+                {
+                    cout<<i<<" ";
+                }
+                else
+                {
+                    cout<<i<<" ";
+                    ans.push_back(i);
+                }
+                
+            }
+        }
+        for(int i=ans.size()-1;i>=0;i--)
+        {
+            cout<<n/ans[i]<<" ";
+        }
+        
+        
+    }
+};
+
+       
