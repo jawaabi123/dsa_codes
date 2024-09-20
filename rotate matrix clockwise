@@ -1,0 +1,62 @@
+https://leetcode.com/problems/rotate-image/description/
+brute approach:
+class Solution {
+public:
+    void rotateMatrix(vector<vector<int>>& matrix) 
+    {
+        int row=matrix.size();
+        int col=matrix[0].size();
+        vector<vector<int>> ans(row, vector<int>(col, 0));
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                ans[j][col-i-1]=matrix[i][j];
+            }
+        }
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                matrix[i][j]=ans[i][j];
+            }
+        }
+    }
+};
+
+2)optimal approach:
+class Solution {
+public:
+    void reverse(vector<int>& mat)
+    {
+        int left=0;
+        int right=mat.size()-1;
+        while(left<=right)
+        {
+            swap(mat[left],mat[right]);
+            left++;
+            right--;
+        }
+    }
+    void rotateMatrix(vector<vector<int>>& matrix) 
+    {
+        int row=matrix.size();
+        int col=matrix[0].size();
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                if(i==j) continue;
+                else if(i<j)
+                {
+                   swap(matrix[i][j],matrix[j][i]);
+                }
+                
+            }
+        }
+        for(int i=0;i<row;i++)
+        {
+            reverse(matrix[i]);
+        }
+    }
+};
