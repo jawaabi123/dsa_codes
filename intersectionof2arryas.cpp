@@ -24,3 +24,28 @@ vector<int> findArrayIntersection(vector<int> &arr1, int n, vector<int> &arr2, i
     }
     return arr;
 }
+
+//https://www.geeksforgeeks.org/problems/intersection-of-two-arrays2404/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
+
+class Solution {
+  public:
+    int NumberofElementsInIntersection(int a[], int b[], int n, int m) 
+    {
+        unordered_set<int> sa;  
+        for(int i=0;i<n;i++)
+        {
+            sa.insert(a[i]);
+        }
+        vector<int> res;                            
+    
+        for (int i = 0; i <m; i++) 
+        {
+            if (sa.find(b[i]) != sa.end()) {
+                res.push_back(b[i]); 
+                sa.erase(b[i]);  
+            }
+        }
+    
+        return res.size();
+    }
+};
