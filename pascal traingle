@@ -1,0 +1,51 @@
+https://leetcode.com/problems/pascals-triangle/
+
+iterative method solution:
+class Solution {
+public:
+    vector<vector<int>> pascalTriangle(int n) 
+    {
+        vector<vector<int>> ans(n);  // Initialize the outer vector with size n
+        for (int i = 0; i < n; i++) 
+        {
+            ans[i].resize(i + 1);  // Resize each row to have i+1 elements
+            ans[i][0] = 1;         // First element of each row is 1
+            ans[i][i] = 1;         // Last element of each row is 1
+
+            for (int j = 1; j < ans[i].size(); j++) 
+            {
+                ans[i][j] = ans[i - 1][j - 1] + ans[i - 1][j];  // Sum of the two elements from the previous row
+            }
+        }
+    return ans;
+    }
+};
+
+recursive solution:
+class Solution {
+public:
+    void rec_pascal(vector<vector<int>>& ans,int n)
+    {
+        if(n==1)
+        {
+            ans.push_back({1});
+            return;
+        }
+        rec_pascal(ans,n-1);
+        vector<int>prev=ans.back();
+        vector<int>temp(n);
+        temp[0]=1;
+        temp[n-1]=1;
+        for(int i=1;i<n-1;i++)
+        {
+           temp[i]=prev[i-1]+prev[i];
+        }
+        ans.push_back(temp);
+    }
+    vector<vector<int>> generate(int n) 
+    {
+        vector<vector<int>> ans;  // Initialize the outer vector with size n
+        rec_pascal(ans,n);
+        return ans;
+    }
+};
