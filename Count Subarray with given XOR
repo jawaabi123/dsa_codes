@@ -1,0 +1,19 @@
+code:https://www.geeksforgeeks.org/problems/count-subarray-with-given-xor/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+class Solution {
+  public:
+    long subarrayXor(vector<int> &arr, int m)
+    {
+        unordered_map<int,int>freq;
+        long count=0;
+        int prefix_xor=0;
+        for(int i=0;i<arr.size();i++)
+        {
+            prefix_xor^=arr[i];
+            int remove_xor=prefix_xor^m;
+            count+=freq[remove_xor];
+            if(prefix_xor==m)count++;
+            freq[prefix_xor]++;
+        }
+        return count;
+    }
+};
