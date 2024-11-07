@@ -1,0 +1,32 @@
+https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1?page=1&category=Graph&sortBy=submissions
+code:
+class Solution {
+  public:
+    vector<int> bfsOfGraph(vector<vector<int>> &adj) 
+    {
+        vector<int> visited(adj.size(), 0);  // Initialize visited vector with 0
+        vector<int> ans;                     // To store the BFS result
+        queue<int> temp;                     // Queue for BFS traversal
+        
+        visited[0] = 1;                      // Mark the starting node as visited
+        temp.push(0);                        // Start BFS from node 0
+        
+        while (!temp.empty()) 
+        {
+            int node = temp.front();         // Get the front node
+            temp.pop();
+            
+            ans.push_back(node);             // Add the node to the result
+            // Traverse all adjacent nodes of the current node
+            for (int neighbor : adj[node]) 
+            {
+                if (!visited[neighbor])      // Check if the node is unvisited
+                {
+                    visited[neighbor] = 1;   // Mark as visited
+                    temp.push(neighbor);     // Push to queue
+                }
+            }
+        }
+        return ans;
+    }
+};
