@@ -1,0 +1,96 @@
+https://www.geeksforgeeks.org/problems/geek-jump/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=geek-jump
+1)recursion:
+class Solution {
+  public:
+    int rec(vector<int>& height, int idx)
+    {
+        if(idx==0)return 0;
+        int one=rec(height,idx-1)+abs(height[idx]-height[idx-1]);
+        int two=INT_MAX;
+        if(idx>1)
+        {
+            two=rec(height,idx-2)+abs(height[idx]-height[idx-2]);
+        }
+        return min(one,two);
+    }
+    int minimumEnergy(vector<int>& height, int n) 
+    {
+        vector<int>dp(n+1,-1);
+        return rec(height,n-1);
+    }
+};
+2)memoization:
+class Solution {
+  public:
+    int rec(vector<int>& height, int idx,vector<int>&dp)
+    {
+        if(idx==0)return 0;
+        // Memoized result
+        if (dp[idx] != -1) return dp[idx]; 
+        int one=rec(height,idx-1,dp)+abs(height[idx]-height[idx-1]);
+        int two=INT_MAX;
+        if(idx>1)
+        {
+            two=rec(height,idx-2,dp)+abs(height[idx]-height[idx-2]);
+        }
+        return dp[idx]=min(one,two);
+    }
+    int minimumEnergy(vector<int>& height, int n) 
+    {
+        vector<int>dp(n,-1);
+        return rec(height,n-1,dp);
+    }
+};
+3)tabulation:
+class Solution {
+  public:
+    int rec(vector<int>& height,vector<int>&dp)
+    {
+        int n=height.size();
+        if(n==1)return 0;
+        dp[0]=0;//energy to move from 0 to 0 index
+        for(int i=1;i<n;i++)
+        {
+            int left=dp[i-1]+abs(height[i]-height[i-1]);
+            int right=INT_MAX;
+            if(i>1)
+            {
+               right=dp[i-2]+abs(height[i]-height[i-2]);
+            }
+            dp[i]=min(left,right);
+        }
+        return dp[n-1];
+    }
+    int minimumEnergy(vector<int>& height, int n) 
+    {
+        vector<int>dp(n,-1);
+        return rec(height,dp);
+    }
+};
+4)space optimized sol:
+class Solution {
+public:
+    int rec(vector<int>& height)
+    {
+        int n=height.size();
+        int first=0;
+        int second=0;
+        for(int i=1;i<n;i++)
+        {
+            int left=second+abs(height[i]-height[i-1]);
+            int right=INT_MAX;
+            if(i>1)
+            {
+               right=first+abs(height[i]-height[i-2]);
+            }
+            int current=min(left,right);
+            first=second;
+            second=current;
+        }
+        return second;
+    }
+    int frogJump(vector<int>& heights)
+    {
+        return rec(heights);
+    }
+};
